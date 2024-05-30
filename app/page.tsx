@@ -1,5 +1,5 @@
-import { db } from "@/lib/db";
-import { person } from "@/lib/schema"
+import { db } from "@/db/index";
+import { person } from "@/db/schema"
 import Image from "next/image";
 
 export default async function Home() {
