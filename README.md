@@ -38,10 +38,21 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## To-do
 
 [/] Install Lucia Auth
+
 [/] Install ShadUI + TailwindCSS
+
 [/] Install Drizzle ORM
-[] Create basic login page
+
+[/] Create basic login page
+
 [] Create register user page
+
 [] Create login/logout function
-[] Create basic/reusable schema
+
+[/] Create basic/reusable schema
+
 [] Organize file/folder structure
+
+[/] Fix unique id column for sqlite db
+
+[] Fix auth errors

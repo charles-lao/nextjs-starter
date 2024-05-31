@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { hashUserPassword, verifyPassword } from "@/lib/hash";
-import { createUser, getUserByEmail } from "@/lib/user";
+import { createUser, getUserByUserName } from "@/lib/user";
 import { createAuthSession, destroySession } from '@/lib/auth';
 
 
@@ -13,9 +13,9 @@ export async function signup(prevState, formData) {
 
     let errors = {};
 
-    if(!email.includes('@')) {
-        errors.email = 'Please enter a valid email address.';
-    }
+    // if(!email.includes('@')) {
+    //     errors.email = 'Please enter a valid email address.';
+    // }
 
     if (password.trim().length < 8) {
         errors.password = 'Password must be at least 8 characters long.';
@@ -48,10 +48,10 @@ export async function signup(prevState, formData) {
 
 
 export async function login(prevState, formData) {
-    const email = formData.get('email');
+    const userName = formData.get('username');
     const password = formData.get('password');
 
-     const existingUser = getUserByEmail(email);
+     const existingUser = getUserByUserName(userName);
 
      if (!existingUser) {
         return {
@@ -74,7 +74,7 @@ export async function login(prevState, formData) {
 
 
     await createAuthSession(existingUser.id);
-    redirect('/training');
+    redirect('/dashboard');
 }
 
 export async function auth(mode, prevState, formData) {

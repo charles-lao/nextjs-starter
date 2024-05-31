@@ -12,11 +12,14 @@ export const person = sqliteTable("Person", {
 
 
 //from lucia docs
-const userTable = sqliteTable("user", {
-    id: text("id").notNull().primaryKey()
+export const userTable = sqliteTable("user", {
+    id: text("id").notNull().primaryKey(),
+    userName: text("username").notNull().unique(),
+    password: text("password").notNull(),
+    role: text("role").notNull()
 });
   
-const sessionTable = sqliteTable("session", {
+export const sessionTable = sqliteTable("session", {
     id: text("id").notNull().primaryKey(),
     userId: text("user_id")
         .notNull()
