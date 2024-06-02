@@ -23,7 +23,7 @@ declare module "lucia" {
 	}
 }
 
-export async function createAuthSession(userId:string) {
+export async function createAuthSession(userId:any) {
   const session = await lucia.createSession(userId, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
   cookies().set(

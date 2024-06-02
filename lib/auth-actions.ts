@@ -7,8 +7,8 @@ import { createAuthSession, destroySession } from '@/lib/auth';
 
 
 
-export async function signup(prevState, formData) {
-    const email = formData.get('email');
+export async function signup(prevState, formData: FormData) {
+    const userName = formData.get('username');
     const password = formData.get('password');
 
     let errors = {};
@@ -17,9 +17,9 @@ export async function signup(prevState, formData) {
     //     errors.email = 'Please enter a valid email address.';
     // }
 
-    if (password.trim().length < 8) {
-        errors.password = 'Password must be at least 8 characters long.';
-    }
+    // if (password.trim().length < 8) {
+    //     errors.password = 'Password must be at least 8 characters long.';
+    // }
 
     if (Object.keys(errors).length > 0) {
         return {
@@ -29,7 +29,7 @@ export async function signup(prevState, formData) {
 
     const hashedPassword = hashUserPassword(password);
     try {
-        const id = createUser(email, hashedPassword);
+        const id = createUser(userName, hashedPassword);
         await createAuthSession(id);
         redirect('/training');
     } catch (error) {
@@ -47,9 +47,18 @@ export async function signup(prevState, formData) {
 }
 
 
-export async function login(prevState, formData) {
+export async function login(prevState: any, formData: FormData) {
     const userName = formData.get('username');
     const password = formData.get('password');
+
+    if (typeof userName !== 'string') {
+        // Handle the case where userName is null or not a string
+        return {
+          errors: {
+            username: 'Please provide a valid username.',
+          },
+        };
+    }
 
      const existingUser = getUserByUserName(userName);
 
@@ -75,14 +84,10 @@ export async function login(prevState, formData) {
 
     await createAuthSession(existingUser.id);
     redirect('/dashboard');
+
+    return prevState;
 }
 
-export async function auth(mode, prevState, formData) {
-    if (mode === 'login') {
-        return login(prevState, formData);
-    }
-    return signup(prevState, formData);
-}
 
 export async function logout() {
     await destroySession();
