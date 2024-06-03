@@ -7,19 +7,31 @@ import { createAuthSession, destroySession } from '@/lib/auth';
 
 
 
-export async function signup(prevState, formData: FormData) {
+export async function signup(prevState: any, formData: FormData) {
     const userName = formData.get('username');
     const password = formData.get('password');
 
     let errors = {};
 
-    // if(!email.includes('@')) {
-    //     errors.email = 'Please enter a valid email address.';
-    // }
+    // type guard
+    if (typeof userName !== 'string') {
+        // Handle the case where userName is null or not a string
+        return {
+          errors: {
+            userName: 'Please provide a valid username.',
+          },
+        };
+    }
 
-    // if (password.trim().length < 8) {
-    //     errors.password = 'Password must be at least 8 characters long.';
-    // }
+    // type guard
+    if (typeof password !== 'string') {
+        // Handle the case where userName is null or not a string
+        return {
+          errors: {
+            password: 'Please provide a valid password.',
+          },
+        };
+    }
 
     if (Object.keys(errors).length > 0) {
         return {
@@ -28,11 +40,13 @@ export async function signup(prevState, formData: FormData) {
     }
 
     const hashedPassword = hashUserPassword(password);
+
     try {
-        const id = createUser(userName, hashedPassword);
-        await createAuthSession(id);
-        redirect('/training');
-    } catch (error) {
+        const user = await createUser(userName, hashedPassword);
+
+        await createAuthSession(user.id);
+        redirect('/dashboard');
+    } catch (error:any) {
         if (error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
             return {
                 errors: {
@@ -43,7 +57,7 @@ export async function signup(prevState, formData: FormData) {
         throw error;
     }
 
-    
+    return prevState;
 }
 
 

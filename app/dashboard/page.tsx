@@ -1,10 +1,9 @@
+import * as React from "react";
 
-
-export default async function DashboardPage() {
-    
-  
-    return (
-        <h1>DASHBOARD</h1>
-    )
-  
+export default function DashboardPage() {
+  return (
+    <div>
+      <h1>DASHBOARD</h1>
+    </div>
+  );
 }
