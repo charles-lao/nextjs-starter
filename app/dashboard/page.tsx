@@ -1,9 +1,22 @@
 import * as React from "react";
 
-export default function DashboardPage() {
+import { verifyAuth } from '@/lib/auth';
+import { redirect } from "next/navigation";
+
+export default async function DashboardPage() {
+
+  // protect route from unauthorized users
+  const result = await verifyAuth();
+
+  if(!result.user) {
+    return redirect('/');
+  }
+
+  
+
   return (
     <div>
-      <h1>DASHBOARD</h1>
+      <h1>WELCOME TO YOUR DASHBOARD</h1>
     </div>
   );
 }

@@ -47,7 +47,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 [/] Create register user page
 
-[] Create login/logout function
+[/] Create login function
+
+[] Create logout function
 
 [/] Create basic/reusable schema
 
@@ -55,6 +57,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 [/] Fix unique id column for sqlite db
 
-[] Fix auth errors
+[/] Fix auth errors
 
 [/] Create sample data for db
+
+[] Create basic dashboard/main page
+
+[/] Protect Dashboard page
