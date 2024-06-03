@@ -49,11 +49,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 [/] Create login function
 
-[] Create logout function
+[/] Create logout function
 
 [/] Create basic/reusable schema
 
-[] Organize file/folder structure
+[ ] Organize file/folder structure
 
 [/] Fix unique id column for sqlite db
 
@@ -61,6 +61,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 [/] Create sample data for db
 
-[] Create basic dashboard/main page
+[ ] Create basic dashboard/main page
 
 [/] Protect Dashboard page
+
+[ ] Role based login/protect
